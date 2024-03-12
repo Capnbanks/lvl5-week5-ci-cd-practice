@@ -1,0 +1,12 @@
+name: Main branch ci
+
+on:
+   push:
+      branches:
+        - master
+        - release/*
+
+        on:
+         pull_request:
+             branches:
+                 - main

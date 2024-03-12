@@ -1,12 +1,31 @@
-name: Main branch ci
+name: Main branch CI
 
 on:
-   push:
-      branches:
-        - master
-        - release/*
+  push:
+    branches:
+      - master
 
-        on:
-         pull_request:
-             branches:
-                 - main
+jobs: 
+  run_unit_tests:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        # This step checks out your repository's code so that subsequent steps can access it.
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        # This step sets up the Node.js environment on the GitHub-hosted runner.
+
+      - name: Install Node modules/ dependencies
+        run: npm install
+        # This step installs the project dependencies using npm.
+
+      - name: Build deps
+        run: npm run build
+
+      - name: Run unit tests
+        run: npm test
+        # This step executes your unit tests using the npm test command.
